@@ -51,7 +51,7 @@ def create_superuser(request: SuperuserCreateSchema):
     db.session.add(superuser)
     db.session.commit()
     db.session.refresh(superuser)
-    return superuser
+    return request
 
 
 def is_active(self, user: User) -> bool:
