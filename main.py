@@ -1,6 +1,7 @@
 import os
 
 from dotenv import load_dotenv
+from fastapi.middleware import cors
 from fastapi_sqlalchemy import DBSessionMiddleware
 from fastapi import FastAPI
 
@@ -11,6 +12,12 @@ from users import user_routes
 load_dotenv(".env")
 
 app = FastAPI()
+
+origins = ["*"]
+app.add_middleware(cors.CORSMiddleware,
+                   allow_origins=origins,
+                   allow_credentials=True,
+                   allow_methods=["*"])
 
 app.add_middleware(DBSessionMiddleware, db_url=os.environ["DATABASE_URL"])
 
