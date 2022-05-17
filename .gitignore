@@ -1,6 +1,5 @@
 .idea
 pyproject.toml
-alembic.ini
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
