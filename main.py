@@ -13,6 +13,7 @@ load_dotenv(".env")
 
 app = FastAPI()
 
+
 origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
