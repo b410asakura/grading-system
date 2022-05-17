@@ -22,7 +22,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.add_middleware(DBSessionMiddleware, db_url=os.environ.get("DATABASE_URL"))
+app.add_middleware(DBSessionMiddleware, db_url=os.environ["DATABASE_URL"])
 
 app.include_router(auth.router)
 app.include_router(user_routes.router)
