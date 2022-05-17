@@ -17,7 +17,7 @@ sys.path.append(BASE_DIR)
 
 config = context.config
 
-config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))
+config.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
 
 
 # this is the Alembic Config object, which provides
