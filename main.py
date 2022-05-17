@@ -13,7 +13,6 @@ load_dotenv(".env")
 
 app = FastAPI()
 
-
 origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
@@ -22,7 +21,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 app.add_middleware(DBSessionMiddleware, db_url=os.environ["DATABASE_URL"])
+uri = os.environ["DATABASE_URL"]
+if uri and uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 
 app.include_router(auth.router)
 app.include_router(user_routes.router)
