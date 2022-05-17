@@ -22,7 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.add_middleware(DBSessionMiddleware, db_url=os.environ["DATABASE_URL"])
+app.add_middleware(DBSessionMiddleware, db_url=os.environ["DATABASE_URL"].replace("postgres://", "postgresql://", 1))
 
 app.include_router(auth.router)
 app.include_router(user_routes.router)
