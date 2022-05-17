@@ -1,12 +1,12 @@
+import os
+import sys
+import re
 from logging.config import fileConfig
 
+from alembic import context
+from dotenv import load_dotenv
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
-from alembic import context
-
-import os, sys
-from dotenv import load_dotenv
 
 import subjects.models
 import users.models
@@ -19,6 +19,9 @@ config = context.config
 
 config.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
 
+uri = os.environ["DATABASE_URL"]
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
