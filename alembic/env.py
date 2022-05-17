@@ -18,6 +18,12 @@ sys.path.append(BASE_DIR)
 config = context.config
 
 config.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
+
+uri = os.getenv("DATABASE_URL")
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
