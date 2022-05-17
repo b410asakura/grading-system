@@ -65,3 +65,19 @@ def is_superuser(self, user: User) -> bool:
 def all_users():
     users = db.session.query(User).all()
     return users
+
+
+def user_detail(id: int):
+    user = db.session.query(User).filter(User.id == id).first()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"User with the id {id} is not available")
+    return user
+
+
+def student_profile_detail(id: int):
+    student = db.session.query(StudentProfile).filter(StudentProfile.id == id).first()
+    if not student:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Student with the id {id} is not available")
+    return student

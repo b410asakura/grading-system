@@ -37,16 +37,11 @@ def registered_students_per_subject(current_user: User = Depends(get_current_use
     return crud.registered_students()
 
 
-@router.get("/dww")
-def all_subdwdjects():
-    return crud.statistic()
+@router.get("/subject_detail/{id}", status_code=200)
+def subject_detail(id: int):
+    return crud.subject_detail(id)
 
 
-
-# @router.get("/{id}", status_code=200, response_model=UserResponse)
-# def user_detail(id: int, db: Session = Depends(get_db)):
-#     user = db.query(models.User).filter(models.User.id == id).first()
-#     if not user:
-#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-#                             detail=f"User with the id {id} is not found")
-#     return user
+@router.get("/{id}", status_code=200)
+def registered_subject_detail(id: int):
+    return crud.registered_subject_detail(id)

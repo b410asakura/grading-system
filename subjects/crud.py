@@ -1,6 +1,5 @@
 from fastapi import HTTPException, status
 from fastapi_sqlalchemy import db
-from sqlalchemy import func
 
 from subjects.models import Subject, RegisterSubject
 from subjects.schemas import SubjectSchema, RegisterSubjectSchema, SubjectPartialUpdateSchema
@@ -61,8 +60,18 @@ def registered_students():
     return subjects
 
 
-def statistic():
-    model = Subject
-    student = db.session.query(RegisterSubject.student, func.sum(model.total).label("total"))
-    return student
+def subject_detail(id: int):
+    subject = db.session.query(Subject).filter(Subject.id == id).first()
+    if not subject:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Subject with the id {id} is not available")
+    return subject
+
+
+def registered_subject_detail(id: int):
+    subject = db.session.query(RegisterSubject).filter(RegisterSubject.id == id).first()
+    if not subject:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"id {id} is not available")
+    return subject
 
