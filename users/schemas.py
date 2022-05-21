@@ -6,7 +6,7 @@ from users.models import Role
 
 
 class UserBaseSchema(BaseModel):
-    staff_id: int
+    staff_id: str
     first_name: str
     last_name: str
     email: EmailStr
