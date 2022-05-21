@@ -33,7 +33,7 @@ def create_users(request: UserCreateSchema):
     staff_id = db.session.query(User).filter(User.staff_id == request.staff_id).first()
     if staff_id:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,
-                            detail= f"an account with {request.s} already exist")
+                            detail=f"an account with {request.staff_id} already exist")
 
     db.session.add(new_professor)
     db.session.commit()
