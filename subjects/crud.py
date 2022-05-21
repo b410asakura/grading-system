@@ -11,10 +11,7 @@ def create_subject(request: SubjectSchema):
                           theory=request.theory,
                           practice=request.practice,
                           credits=request.credits,
-                          ects=request.ects,
-                          mid_grade=request.mid_grade,
-                          fin_grade=request.fin_grade,
-                          total=request.total)
+                          ects=request.ects)
     db.session.add(new_subject)
     db.session.commit()
     db.session.refresh(new_subject)
