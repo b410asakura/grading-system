@@ -19,7 +19,7 @@ def create_subject(request: SubjectSchema):
 
 
 def register_subject(request: RegisterSubjectSchema):
-    new_subject = RegisterSubject(subject_id=request.subject_id)
+    new_subject = RegisterSubject(subject_id=request.subject_id, student_id=request.student_id)
     db.session.add(new_subject)
     db.session.commit()
     db.session.refresh(new_subject)

@@ -23,7 +23,7 @@ def register_subject(request: RegisterSubjectSchema,
 
 
 @router.patch('/{id}')
-def update_subject(id: int, request: SubjectPartialUpdateSchema):
+def update_registered_subject(id: int, request: SubjectPartialUpdateSchema):
     return crud.update_subject(id, request)
 
 

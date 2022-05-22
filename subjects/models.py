@@ -30,11 +30,11 @@ class RegisterSubject(Base):
     student = relationship(StudentProfile)
     subject_id = Column(Integer, ForeignKey(Subject.id))
     subject = relationship(Subject)
-    mid_grade = Column(Integer, default=0)
-    mid_average = Column(Integer, default=0)
-    fin_grade = Column(Integer, default=0)
-    fin_average = Column(Integer, default=0)
-    total = Column(Integer, default=0)
+    mid_grade = Column(Integer)
+    mid_average = Column(Integer)
+    fin_grade = Column(Integer)
+    fin_average = Column(Integer)
+    total = Column(Integer)
 
 
 

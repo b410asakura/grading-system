@@ -29,7 +29,7 @@ class SubjectPartialUpdateSchema(BaseModel):
 
 class RegisterSubjectSchema(BaseModel):
     subject_id: int
-    student_id: Optional[int] = None
+    student_id: int
 
     class Config:
         orm_mode = True
