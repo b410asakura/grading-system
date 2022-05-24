@@ -18,13 +18,12 @@ class SubjectSchema(BaseModel):
 
 
 class SubjectPartialUpdateSchema(BaseModel):
-    subject_id: Optional[int] = None
-    student_id: Optional[int] = None
-    mid_grade: Optional[int] = None
-    mid_average: Optional[int] = None
-    fin_grade: Optional[int] = None
-    fin_average: Optional[int] = None
-    total: Optional[int] = None
+    professor_id: Optional[int] = None
+    name: Optional[str] = None
+    theory: Optional[int] = None
+    practice: Optional[str] = None
+    credits: Optional[int] = None
+    ects: Optional[int] = None
 
 
 class RegisterSubjectSchema(BaseModel):
@@ -33,6 +32,16 @@ class RegisterSubjectSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class SubjectRegisterPartialUpdateSchema(BaseModel):
+    subject_id: Optional[int] = None
+    student_id: Optional[int] = None
+    mid_grade: Optional[int] = None
+    mid_average: Optional[int] = None
+    fin_grade: Optional[int] = None
+    fin_average: Optional[int] = None
+    total: Optional[int] = None
 
 
 class RegisteredStudentsSchema(BaseModel):

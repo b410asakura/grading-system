@@ -2,7 +2,8 @@ from fastapi import HTTPException, status
 from fastapi_sqlalchemy import db
 
 from subjects.models import Subject, RegisterSubject
-from subjects.schemas import SubjectSchema, RegisterSubjectSchema, SubjectPartialUpdateSchema
+from subjects.schemas import SubjectSchema, RegisterSubjectSchema, SubjectPartialUpdateSchema, \
+    SubjectRegisterPartialUpdateSchema
 
 
 def create_subject(request: SubjectSchema):
@@ -31,7 +32,7 @@ def all_subjects():
     return subjects
 
 
-def update_subject(id: int, request: SubjectPartialUpdateSchema):
+def registered_subject_update(id: int, request: SubjectRegisterPartialUpdateSchema):
     subject = db.session.query(RegisterSubject).filter(RegisterSubject.id == id).first()
     if not subject:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -40,6 +41,23 @@ def update_subject(id: int, request: SubjectPartialUpdateSchema):
     subject.mid_average = (subject.mid_grade * 40) / 100
     subject.fin_average = (subject.fin_grade * 60) / 100
     subject.total = subject.mid_average + subject.fin_average
+
+    data = request.dict(exclude_unset=True)
+    for key, value in data.items():
+        setattr(subject, key, value)
+
+    db.session.add(subject)
+    db.session.commit()
+    db.session.refresh(subject)
+
+    return "Success"
+
+
+def subject_update(id: int, request: SubjectPartialUpdateSchema):
+    subject = db.session.query(Subject).filter(Subject.id == id).first()
+    if not subject:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Student with the id {id} is not available")
 
     data = request.dict(exclude_unset=True)
     for key, value in data.items():

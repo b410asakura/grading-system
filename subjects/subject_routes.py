@@ -2,7 +2,8 @@ from fastapi import APIRouter, Depends
 
 from deps.oauth2 import get_current_user
 from subjects import crud
-from subjects.schemas import SubjectSchema, RegisterSubjectSchema, SubjectPartialUpdateSchema
+from subjects.schemas import SubjectSchema, RegisterSubjectSchema, SubjectPartialUpdateSchema, \
+    SubjectRegisterPartialUpdateSchema
 from users.models import User
 
 router = APIRouter(
@@ -23,8 +24,14 @@ def register_subject(request: RegisterSubjectSchema,
 
 
 @router.patch('/{id}')
-def update_registered_subject(id: int, request: SubjectPartialUpdateSchema):
-    return crud.update_subject(id, request)
+def update_registered_subject(id: int,
+                              request: SubjectRegisterPartialUpdateSchema):
+    return crud.registered_subject_update(id, request)
+
+
+@router.patch('registered/{id}')
+def update_subject(id: int, request: SubjectPartialUpdateSchema):
+    return crud.subject_update(id, request)
 
 
 @router.get("/")
