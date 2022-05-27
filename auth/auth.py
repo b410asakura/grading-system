@@ -25,12 +25,12 @@ def login(request: OAuth2PasswordRequestForm = Depends()):
 
     access_token = create_access_token(data={"sub": user.staff_id})
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer",
+            "role": user.role, "is_superuser": user.is_superuser}
 
 
 @router.post("/create_user", response_model=UserBaseSchema)
-def create_users(request: UserCreateSchema,
-                 current_user: User = Depends(get_current_active_superuser)):
+def create_users(request: UserCreateSchema):
     return crud.create_users(request)
 
 
