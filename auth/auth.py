@@ -5,7 +5,6 @@ from fastapi_sqlalchemy import db
 
 from auth.JWT import create_access_token
 from auth.hashing import Hash
-from deps.oauth2 import get_current_active_superuser
 from users import crud
 from users.models import User
 from users.schemas import UserCreateSchema, UserBaseSchema, SuperuserCreateSchema
