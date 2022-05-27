@@ -37,3 +37,5 @@ def user_detail(id: int):
 @router.patch("user/{id}", status_code=200)
 def user_update(id: int, request: UserUpdate):
     return crud.user_update(id, request)
+
+

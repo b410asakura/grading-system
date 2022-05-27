@@ -1,15 +1,8 @@
-from enum import Enum
-
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 
 Base = declarative_base()
-
-
-class Role(Enum):
-    PROFESSOR = "professor"
-    STUDENT = "student"
 
 
 class User(Base):
@@ -22,7 +15,8 @@ class User(Base):
     email = Column(String)
     photo = Column(String)
     password = Column(String)
-    role = Role = None
+    is_student = Column(Boolean(), default=False)
+    is_professor = Column(Boolean(), default=False)
     is_active = Column(Boolean(), default=True)
     is_superuser = Column(Boolean(), default=False)
 

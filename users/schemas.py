@@ -1,8 +1,6 @@
-from typing import Optional, List
+from typing import Optional
 
 from pydantic import BaseModel, EmailStr
-
-from users.models import Role
 
 
 class UserBaseSchema(BaseModel):
@@ -13,7 +11,8 @@ class UserBaseSchema(BaseModel):
     photo: str
     is_active: Optional[bool] = True
     is_superuser: bool = False
-    role: Role
+    is_student: bool = False
+    is_professor: bool = False
 
     class Config:
         orm_mode = True
@@ -31,7 +30,8 @@ class UserUpdate(BaseModel):
     photo: Optional[str] = None
     is_active: Optional[bool] = True
     is_superuser: Optional[str] = False
-    role: Optional[Role] = None
+    is_student: Optional[bool] = False
+    is_professor: Optional[bool] = False
 
 
 class UserInDBBase(UserBaseSchema):

@@ -1,4 +1,4 @@
-from fastapi import HTTPException, status
+from fastapi import HTTPException, status, Query
 from fastapi_sqlalchemy import db
 
 from auth.hashing import Hash
@@ -25,9 +25,10 @@ def create_users(request: UserCreateSchema):
         last_name=request.last_name,
         staff_id=request.staff_id,
         email=request.email,
-        role=request.role,
         photo=request.photo,
         is_superuser=request.is_superuser,
+        is_student=request.is_student,
+        is_professor=request.is_professor,
         password=Hash.bcrypt(request.password)
     )
 
@@ -116,3 +117,27 @@ def student_profile_detail(id: int):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"User with the id {id} is not available")
     return student
+
+
+# def user_delete(id: int):
+#     user = db.session.query(User).filter(User.id == id).first()
+#     if not user:
+#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+#                             detail=f"User with the id {id} is not available")
+#     db.session.delete(user)
+#     db.session.commit()
+#     db.session.refresh()
+#
+#     return None
+#
+#
+# def student_delete(id: int):
+#     student = db.session.query(StudentProfile).filter(StudentProfile.id == id).first()
+#     if not student:
+#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+#                             detail=f"User with the id {id} is not available")
+#     db.session.delete(student)
+#     db.session.commit()
+#     db.session.refresh()
+#
+#     return None
