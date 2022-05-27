@@ -25,8 +25,11 @@ def login(request: OAuth2PasswordRequestForm = Depends()):
 
     access_token = create_access_token(data={"sub": user.staff_id})
 
-    return {"access_token": access_token, "token_type": "bearer",
-            "role": user.role, "is_superuser": user.is_superuser}
+    return {"access_token": access_token,
+            "token_type": "bearer",
+            "is_student": user.is_student,
+            "is_professor": user.is_professor,
+            "is_superuser": user.is_superuser}
 
 
 @router.post("/create_user", response_model=UserBaseSchema)
