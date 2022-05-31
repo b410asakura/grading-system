@@ -39,6 +39,11 @@ def all_subjects():
     return crud.all_subjects()
 
 
+@router.get("/all-registered")
+def all_registered_subjects():
+    return crud.all_registered_subects()
+
+
 @router.get("/registered_students")
 def registered_students_per_subject(current_user: User = Depends(get_current_user)):
     return crud.registered_students()

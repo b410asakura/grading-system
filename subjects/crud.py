@@ -90,3 +90,10 @@ def registered_subject_detail(id: int):
                             detail=f"id {id} is not available")
     return subject
 
+
+def all_registered_subects():
+    regs = db.session.query(RegisterSubject).all()
+    return regs
+
+
+
